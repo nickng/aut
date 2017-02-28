@@ -1,0 +1,196 @@
+
+state 0
+	$accept: .aut $end 
+
+	DES  shift 3
+	.  error
+
+	aut  goto 1
+	des  goto 2
+
+state 1
+	$accept:  aut.$end 
+
+	$end  accept
+	.  error
+
+
+state 2
+	aut:  des.trans 
+
+	LPAREN  shift 5
+	.  error
+
+	trans  goto 4
+
+state 3
+	des:  DES.LPAREN DIGITS COMMA DIGITS COMMA DIGITS RPAREN 
+
+	LPAREN  shift 6
+	.  error
+
+
+state 4
+	aut:  des trans.    (1)
+	trans:  trans.LPAREN DIGITS COMMA LABEL COMMA DIGITS RPAREN 
+
+	LPAREN  shift 7
+	.  reduce 1 (src line 24)
+
+
+state 5
+	trans:  LPAREN.DIGITS COMMA LABEL COMMA DIGITS RPAREN 
+
+	DIGITS  shift 8
+	.  error
+
+
+state 6
+	des:  DES LPAREN.DIGITS COMMA DIGITS COMMA DIGITS RPAREN 
+
+	DIGITS  shift 9
+	.  error
+
+
+state 7
+	trans:  trans LPAREN.DIGITS COMMA LABEL COMMA DIGITS RPAREN 
+
+	DIGITS  shift 10
+	.  error
+
+
+state 8
+	trans:  LPAREN DIGITS.COMMA LABEL COMMA DIGITS RPAREN 
+
+	COMMA  shift 11
+	.  error
+
+
+state 9
+	des:  DES LPAREN DIGITS.COMMA DIGITS COMMA DIGITS RPAREN 
+
+	COMMA  shift 12
+	.  error
+
+
+state 10
+	trans:  trans LPAREN DIGITS.COMMA LABEL COMMA DIGITS RPAREN 
+
+	COMMA  shift 13
+	.  error
+
+
+state 11
+	trans:  LPAREN DIGITS COMMA.LABEL COMMA DIGITS RPAREN 
+
+	LABEL  shift 14
+	.  error
+
+
+state 12
+	des:  DES LPAREN DIGITS COMMA.DIGITS COMMA DIGITS RPAREN 
+
+	DIGITS  shift 15
+	.  error
+
+
+state 13
+	trans:  trans LPAREN DIGITS COMMA.LABEL COMMA DIGITS RPAREN 
+
+	LABEL  shift 16
+	.  error
+
+
+state 14
+	trans:  LPAREN DIGITS COMMA LABEL.COMMA DIGITS RPAREN 
+
+	COMMA  shift 17
+	.  error
+
+
+state 15
+	des:  DES LPAREN DIGITS COMMA DIGITS.COMMA DIGITS RPAREN 
+
+	COMMA  shift 18
+	.  error
+
+
+state 16
+	trans:  trans LPAREN DIGITS COMMA LABEL.COMMA DIGITS RPAREN 
+
+	COMMA  shift 19
+	.  error
+
+
+state 17
+	trans:  LPAREN DIGITS COMMA LABEL COMMA.DIGITS RPAREN 
+
+	DIGITS  shift 20
+	.  error
+
+
+state 18
+	des:  DES LPAREN DIGITS COMMA DIGITS COMMA.DIGITS RPAREN 
+
+	DIGITS  shift 21
+	.  error
+
+
+state 19
+	trans:  trans LPAREN DIGITS COMMA LABEL COMMA.DIGITS RPAREN 
+
+	DIGITS  shift 22
+	.  error
+
+
+state 20
+	trans:  LPAREN DIGITS COMMA LABEL COMMA DIGITS.RPAREN 
+
+	RPAREN  shift 23
+	.  error
+
+
+state 21
+	des:  DES LPAREN DIGITS COMMA DIGITS COMMA DIGITS.RPAREN 
+
+	RPAREN  shift 24
+	.  error
+
+
+state 22
+	trans:  trans LPAREN DIGITS COMMA LABEL COMMA DIGITS.RPAREN 
+
+	RPAREN  shift 25
+	.  error
+
+
+state 23
+	trans:  LPAREN DIGITS COMMA LABEL COMMA DIGITS RPAREN.    (4)
+
+	.  reduce 4 (src line 31)
+
+
+state 24
+	des:  DES LPAREN DIGITS COMMA DIGITS COMMA DIGITS RPAREN.    (2)
+
+	.  reduce 2 (src line 27)
+
+
+state 25
+	trans:  trans LPAREN DIGITS COMMA LABEL COMMA DIGITS RPAREN.    (3)
+
+	.  reduce 3 (src line 30)
+
+
+10 terminals, 4 nonterminals
+5 grammar rules, 26/8000 states
+0 shift/reduce, 0 reduce/reduce conflicts reported
+53 working sets used
+memory: parser 2/120000
+0 extra closures
+22 shift entries, 1 exceptions
+3 goto entries
+0 entries saved by goto default
+Optimizer space used: output 25/120000
+25 table entries, 0 zero
+maximum spread: 10, maximum offset: 10

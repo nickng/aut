@@ -5,7 +5,7 @@ import (
 	"io"
 )
 
-var autfile = new(Aut)
+var autfile *Aut
 %}
 
 %union {
@@ -34,6 +34,7 @@ trans : trans LPAREN DIGITS COMMA LABEL COMMA DIGITS RPAREN { autfile.AddTransit
 %%
 
 func Parse(r io.Reader) (*Aut, error) {
+	autfile = new(Aut)
 	l := NewLexer(r)
 	autParse(l)
 	select {

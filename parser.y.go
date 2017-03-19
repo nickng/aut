@@ -8,7 +8,7 @@ import (
 	"io"
 )
 
-var autfile = new(Aut)
+var autfile *Aut
 
 //line aut.y:11
 type autSymType struct {
@@ -47,6 +47,7 @@ const autInitialStackSize = 16
 //line aut.y:34
 
 func Parse(r io.Reader) (*Aut, error) {
+	autfile = new(Aut)
 	l := NewLexer(r)
 	autParse(l)
 	select {
@@ -64,11 +65,7 @@ var autExca = [...]int{
 	-2, 0,
 }
 
-const autNprod = 5
 const autPrivate = 57344
-
-var autTokenNames []string
-var autStates []string
 
 const autLast = 25
 

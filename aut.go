@@ -15,6 +15,10 @@ type Transition struct {
 	To    State
 }
 
+func (t *Transition) String() string {
+	return fmt.Sprintf("(%d, %s, %d)\n", int(t.From), t.Label, int(t.To))
+}
+
 // Aut is the root data structure of an aut file.
 type Aut struct {
 	Init           State
@@ -43,8 +47,7 @@ func (a *Aut) String() string {
 	buf.WriteString(fmt.Sprintf("des (%d, %d, %d)\n",
 		int(a.Init), a.NumTransitions, a.NumStates))
 	for _, t := range a.Transitions {
-		buf.WriteString(fmt.Sprintf("(%d, %s, %d)\n",
-			int(t.From), t.Label, int(t.To)))
+		buf.WriteString(t.String())
 	}
 
 	return buf.String()
